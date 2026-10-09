@@ -1,0 +1,14 @@
+{
+  "name": "artlas",
+  "private": true,
+  "type": "module",
+  "description": "AR.T.L.A.S. — fuente modular, compilación y pruebas",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:debug": "node build.mjs --sin-min",
+    "test": "python3 tests/suite.py"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

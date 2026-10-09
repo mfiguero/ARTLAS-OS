@@ -1,0 +1,29 @@
+{
+  "ver": "v7.6",
+  "num": "7.6",
+  "iteracion": 86,
+  "dominios": [
+    "artlas.ar",
+    "*.artlas.ar",
+    "artlas.netlify.app",
+    "*--artlas.netlify.app",
+    "artlas-ai-arg.netlify.app",
+    "*--artlas-ai-arg.netlify.app",
+  "artlas-os.netlify.app",
+  "*--artlas-os.netlify.app",
+  "artlas-ucasal.netlify.app",
+  "*--artlas-ucasal.netlify.app",
+    "localhost",
+    "127.0.0.1"
+  ],
+  "licencia": {
+    "ver": "v7.4",
+    "original": "v6.8.3",
+    "fecha_original": "5 de octubre de 2026",
+    "fecha_original_en": "October 5, 2026",
+    "fecha": "8 de octubre de 2026",
+    "marca": "®",
+    "contacto": "mfiguero@gmail.com",
+    "fecha_en": "October 8, 2026"
+  }
+}
