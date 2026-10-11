@@ -21,7 +21,18 @@ jobs:
       - uses: actions/checkout@v4
       - name: Descomprimir la fuente si se subió como .zip
         run: |
-          Z=$(ls ARTLAS-OS-*fuente*.zip 2>/dev/null | sort -V | tail -1 || true)
+          # elige el .zip de la versión más alta según SU artlas.config.json (no por el nombre: v761 > v77 al ordenar texto)
+          Z=$(python3 - <<'PY'
+          import glob, json, re, zipfile
+          best = None
+          for f in glob.glob("ARTLAS-OS-*fuente*.zip"):
+              try: v = json.loads(zipfile.ZipFile(f).read("artlas.config.json"))["ver"]
+              except Exception: continue
+              k = tuple(int(x) for x in re.findall(r"\d+", v))
+              if best is None or k > best[0]: best = (k, f)
+          print(best[1] if best else "")
+          PY
+          )
           if [ -n "$Z" ]; then unzip -o -q "$Z" && echo "Fuente tomada de $Z"; fi
           test -f build.mjs || { echo "::error::Falta la fuente: subí ARTLAS-OS-vXX-fuente.zip al repositorio"; exit 1; }
       - uses: actions/setup-node@v4
@@ -46,7 +57,18 @@ jobs:
       - uses: actions/checkout@v4
       - name: Descomprimir la fuente si se subió como .zip
         run: |
-          Z=$(ls ARTLAS-OS-*fuente*.zip 2>/dev/null | sort -V | tail -1 || true)
+          # elige el .zip de la versión más alta según SU artlas.config.json (no por el nombre: v761 > v77 al ordenar texto)
+          Z=$(python3 - <<'PY'
+          import glob, json, re, zipfile
+          best = None
+          for f in glob.glob("ARTLAS-OS-*fuente*.zip"):
+              try: v = json.loads(zipfile.ZipFile(f).read("artlas.config.json"))["ver"]
+              except Exception: continue
+              k = tuple(int(x) for x in re.findall(r"\d+", v))
+              if best is None or k > best[0]: best = (k, f)
+          print(best[1] if best else "")
+          PY
+          )
           if [ -n "$Z" ]; then unzip -o -q "$Z" && echo "Fuente tomada de $Z"; fi
           test -f build.mjs || { echo "::error::Falta la fuente: subí ARTLAS-OS-vXX-fuente.zip al repositorio"; exit 1; }
       - name: Liberar espacio en el disco del runner
@@ -60,6 +82,7 @@ jobs:
           name: ARTLAS-OS-iso-amd64
           path: imagen/salida/*amd64.iso*
           compression-level: 0
+          if-no-files-found: error
 
   raspberry:
     needs: app
@@ -70,7 +93,18 @@ jobs:
       - uses: actions/checkout@v4
       - name: Descomprimir la fuente si se subió como .zip
         run: |
-          Z=$(ls ARTLAS-OS-*fuente*.zip 2>/dev/null | sort -V | tail -1 || true)
+          # elige el .zip de la versión más alta según SU artlas.config.json (no por el nombre: v761 > v77 al ordenar texto)
+          Z=$(python3 - <<'PY'
+          import glob, json, re, zipfile
+          best = None
+          for f in glob.glob("ARTLAS-OS-*fuente*.zip"):
+              try: v = json.loads(zipfile.ZipFile(f).read("artlas.config.json"))["ver"]
+              except Exception: continue
+              k = tuple(int(x) for x in re.findall(r"\d+", v))
+              if best is None or k > best[0]: best = (k, f)
+          print(best[1] if best else "")
+          PY
+          )
           if [ -n "$Z" ]; then unzip -o -q "$Z" && echo "Fuente tomada de $Z"; fi
           test -f build.mjs || { echo "::error::Falta la fuente: subí ARTLAS-OS-vXX-fuente.zip al repositorio"; exit 1; }
       - name: Liberar espacio en el disco del runner
@@ -86,3 +120,4 @@ jobs:
           name: ARTLAS-OS-raspberrypi-arm64
           path: imagen/salida/*raspberrypi*
           compression-level: 0
+          if-no-files-found: error
