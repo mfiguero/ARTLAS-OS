@@ -1,2 +1,3 @@
 # ARTLAS-OS
-Nuevo sistema operativo basado en la plataforma ARTLAS
+AR.T.L.A.S. OS es un sistema operativo basado en Linux Debian, concebido desde su origen para integrar la Inteligencia Artificial como componente central de la experiencia operativa. Desarrollado por AI-TECH.ar, combina un entorno de escritorio propio con herramientas de gestión, integración de modelos de lenguaje (LLM) y acceso a capacidades inteligentes directamente desde el sistema.
+A diferencia de los sistemas operativos convencionales, a los que se les incorporan aplicaciones de IA, AR.T.L.A.S. OS propone un entorno en el que la inteligencia artificial ocupa un lugar central en la interacción con el sistema, la gestión de herramientas y el acceso al conocimiento. Su arquitectura modular permite seleccionar y gestionar modelos de IA, con una evolución orientada a ampliar las capacidades de procesamiento local, asistencia inteligente y automatización.
